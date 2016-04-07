@@ -226,7 +226,7 @@
           if ($score > $maxscore) $score = $maxscore;	
           elseif ($score < 0) $score = 0;
        
-          $scores_array[] = $score ;
+          $scores_array = array("$score") ;
       }
      }
      //First, select the maximum score in research

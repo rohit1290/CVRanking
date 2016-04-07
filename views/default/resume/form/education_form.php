@@ -52,10 +52,10 @@ function addInput(divName){
           var newdiv = document.createElement('div');
           newdiv.id = 'parent' + counter;
           var bodyText = '<div id="child' + counter + '">';
-          bodyText += '<?php echo $divsubjects;?><?php echo elgg_echo('resume:education:subject'); echo elgg_echo('resume:*');?><input type="text" value="" name="subjects[]" class="elgg-input-text" /></div>';
-          bodyText += '<?php echo $divscores;?><?php echo elgg_echo('resume:education:score'); echo elgg_echo('resume:*');?><input type="text" name="scores[]" value="" class="elgg-input-text"/></div>';
-          bodyText += '<?php echo $divhours;?><?php echo elgg_echo('resume:education:hour'); echo elgg_echo('resume:*');?><input type="text" name="hours[]" value="" class="elgg-input-text"/></div><br /><br /><div class="clearfloat"></div>';
-          bodyText += '<?php echo $divtypes;?><?php echo elgg_echo('resume:education:type'); echo elgg_echo('resume:*'); echo '<select name="types[]" class="elgg-input-dropdown" style="margin-top:5px;margin-bottom:5px">' . $credittype_options . '</select>';?></div>';
+          bodyText += '<?php echo $divsubjects;?><?php echo elgg_echo('resume:education:subject'); echo elgg_echo('resume:*');?><input type="text" value="" name="subjects[]" class="elgg-input-text" required/></div>';
+          bodyText += '<?php echo $divscores;?><?php echo elgg_echo('resume:education:score'); echo elgg_echo('resume:*');?><input type="text" name="scores[]" value="" class="elgg-input-text" required/></div>';
+          bodyText += '<?php echo $divhours;?><?php echo elgg_echo('resume:education:hour'); echo elgg_echo('resume:*');?><input type="text" name="hours[]" value="" class="elgg-input-text" required/></div><br /><br /><div class="clearfloat"></div>';
+          bodyText += '<?php echo $divtypes;?><?php echo elgg_echo('resume:education:type'); echo elgg_echo('resume:*'); echo '<select name="types[]" class="elgg-input-dropdown" style="margin-top:5px;margin-bottom:5px" required>' . $credittype_options . '</select>';?></div>';
           bodyText += '<?php echo $divstarts;?><?php echo elgg_echo('resume:education:starts');?><br /><input type="text" name="starts' + counter + '" class="elgg-input-date popup_calendar" /></div>';
           bodyText += '<?php echo $divends;?><?php echo elgg_echo('resume:education:ends');?><br /><input type="text" name="ends' + counter + '" class="elgg-input-date popup_calendar hasDatepicker" /></div>';
           bodyText +=  '<br /><br /><br /> <div align="right"><input type="button" class="elgg-button elgg-button-action" onClick="removeElement(\'parent' + counter + '\', \'child' + counter + '\')" value="<?php echo elgg_echo('resume:education:removesubject'); ?>"></div></div><div class="divsubobject"></div><br />';
@@ -76,9 +76,9 @@ function addInput(divName){
           var newdiv = document.createElement('div');
           newdiv.id = 'parent' + counternew;
           var bodyText = '<div id="child' + counternew + '"><?php echo elgg_echo('resume:education:structurenew'); ?>';
-          bodyText += '<div><?php echo elgg_echo('resume:education:structure2'); echo elgg_echo('resume:*'); ?><br /><input type="text" name="structure2" value="" class="elgg-input-text"/></div>';
-          bodyText += '<div style="float:left; width:24%; margin-right:15px;"><?php echo elgg_echo('resume:education:country'); echo elgg_echo('resume:*'); ?><br /><?php echo '<select name="country" class="elgg-input-dropdown" style="margin-top:5px;margin-bottom:5px">' . $country_options . '</select>'; ?></div>';
-          bodyText += '<div style="float:left; width:20%; margin-right:15px;"><?php echo elgg_echo('resume:education:insttype'); echo elgg_echo('resume:*'); ?><br /><?php echo '<select name="insttype" class="elgg-input-dropdown" style="margin-top:5px;margin-bottom:5px">' . $insttype_options . '</select>'; ?></div>';
+          bodyText += '<div><?php echo elgg_echo('resume:education:structure2'); echo elgg_echo('resume:*'); ?><br /><input type="text" name="structure2" value="" class="elgg-input-text"/ required></div>';
+          bodyText += '<div style="float:left; width:24%; margin-right:15px;"><?php echo elgg_echo('resume:education:country'); echo elgg_echo('resume:*'); ?><br /><?php echo '<select name="country" class="elgg-input-dropdown" style="margin-top:5px;margin-bottom:5px" required>' . $country_options . '</select>'; ?></div>';
+          bodyText += '<div style="float:left; width:20%; margin-right:15px;"><?php echo elgg_echo('resume:education:insttype'); echo elgg_echo('resume:*'); ?><br /><?php echo '<select name="insttype" class="elgg-input-dropdown" style="margin-top:5px;margin-bottom:5px" required>' . $insttype_options . '</select>'; ?></div>';
           bodyText += '<div style="float:left; width:14%; margin-right:15px;"><?php echo elgg_echo('resume:education:budget'); ?><br /><input type="text" name="budget" value="" class="elgg-input-text"/></div>';
           bodyText += '<div style="float:left; width:14%; margin-right:15px;"><?php echo elgg_echo('resume:education:professors'); ?><br /><input type="text" name="professors"  value="" class="elgg-input-text"/></div>';
           bodyText += '<div style="float:left; width:14%;"><?php echo elgg_echo('resume:education:students'); ?><br /><input type="text" name="students" value="" class="elgg-input-text"/></div>';
@@ -132,7 +132,8 @@ function removeElement(parentDiv, childDiv){
        <?php echo elgg_view('input/dropdown', 
               array('name' => 'level', 
                   'options_values' => $levels, 
-                  'value' => $vars['entity']->level));
+                  'value' => $vars['entity']->level,
+				  'required' => true));
       ?>
     </div>
      
@@ -152,7 +153,7 @@ function removeElement(parentDiv, childDiv){
     <p>
       <?php echo elgg_echo('resume:education:heading'); 
       echo elgg_echo('resume:*');?><br />
-      <?php echo elgg_view('input/text', array('name' => 'heading', 'value' => $vars['entity']->heading)); ?>
+      <?php echo elgg_view('input/text', array('name' => 'heading', 'value' => $vars['entity']->heading,'required' => true)); ?>
     </p>
     
     <p>
@@ -160,7 +161,8 @@ function removeElement(parentDiv, childDiv){
       echo elgg_echo('resume:*');?><br /> <?php echo elgg_view('input/dropdown', 
               array('name' => 'field', 
                   'options_values' => $fields, 
-                  'value' => $vars['entity']->field));
+                  'value' => $vars['entity']->field,
+				  'required' => true));
       ?>
     </p>
     
@@ -169,7 +171,8 @@ function removeElement(parentDiv, childDiv){
       echo elgg_echo('resume:*');?><br /> <?php echo elgg_view('input/dropdown', 
               array('name' => 'edutype', 
                   'options_values' => $edutypes, 
-                  'value' => $vars['entity']->edutype));
+                  'value' => $vars['entity']->edutype,
+				  'required' => true));
       ?>
     </p>
     
@@ -179,13 +182,13 @@ function removeElement(parentDiv, childDiv){
       <?php 
       if (isset($vars['entity'])){
          $university = $vars['entity']->structure;
-             $query = "SELECT * FROM {$CONFIG->dbprefix}CVR_university_entity
+             $query = "SELECT * FROM ".elgg_get_config('dbprefix')."university_entity
                       WHERE university_id='$university'";
              $result = get_data_row($query);
                $uniname = $result->name; 
       }
       echo elgg_view('input/autocomplete', array('name' => 'structure', 'match_on' => 'universities',
-          'value' => $vars['entity']->structure)); ?>
+          'value' => $vars['entity']->structure,'required' => true)); ?>
         </div>
     
        <div style="float:left; width:35%;">
@@ -211,7 +214,7 @@ function removeElement(parentDiv, childDiv){
      <?php echo elgg_view('input/dropdown', 
               array('name' => 'hourtype', 
                   'options_values' => $hourtypes, 
-                  'value' => $vars['entity']->hourtype));
+                  'value' => $vars['entity']->hourtype,'required' => true));
       ?>
     </p>
         
@@ -221,14 +224,14 @@ function removeElement(parentDiv, childDiv){
      <?php echo elgg_view('input/dropdown', 
               array('name' => 'gradetype', 
                   'options_values' => $gradetypes, 
-                  'value' => $vars['entity']->gradetype));
+                  'value' => $vars['entity']->gradetype,'required' => true));
       ?>
     </p>
    
      <div style="float:left; width:20%; text-align:center; margin-top:10px; margin-right:45px;">
       <?php echo elgg_echo('resume:education:classrank'); 
       echo elgg_echo('resume:*');?><br />
-      <?php echo elgg_view('input/text', array('name' => 'classrank', 'value' => $vars['entity']->classrank)); ?>
+      <?php echo elgg_view('input/text', array('name' => 'classrank', 'value' => $vars['entity']->classrank,'required' => true)); ?>
     </div>
     
     <div style="float:left; width:50%;">
@@ -260,17 +263,17 @@ function removeElement(parentDiv, childDiv){
        echo "1. ";
        echo elgg_echo('resume:education:subject');
       echo elgg_echo('resume:*');
-       echo elgg_view('input/text', array('name' => "subjects[]", 'value' => ""));
+       echo elgg_view('input/text', array('name' => "subjects[]", 'value' => "",'required' => true));
        echo "</div>";
        echo $divscores;
     echo elgg_echo('resume:education:score');
       echo elgg_echo('resume:*');
-       echo elgg_view('input/text', array('name' => "scores[]", 'value' => ""));
+       echo elgg_view('input/text', array('name' => "scores[]", 'value' => "",'required' => true));
        echo "</div>";
        echo $divhours;
     echo elgg_echo('resume:education:hour');
       echo elgg_echo('resume:*');
-       echo elgg_view('input/text', array('name' => "hours[]", 'value' => ""));
+       echo elgg_view('input/text', array('name' => "hours[]", 'value' => "",'required' => true));
        echo '</div><div class="clearfloat"></div>';
        
        echo $divtypes;
@@ -279,7 +282,8 @@ function removeElement(parentDiv, childDiv){
        echo elgg_view('input/dropdown', 
               array('name' => 'types[]', 
                   'options_values' => $credittypes, 
-                  'value' => ""));
+                  'value' => ""
+				  ,'required' => true));
        echo "</div>";
        echo $divstarts;
     echo elgg_echo('resume:education:starts');
@@ -297,17 +301,17 @@ function removeElement(parentDiv, childDiv){
        echo "2. ";
        echo elgg_echo('resume:education:subject');
       echo elgg_echo('resume:*');
-       echo elgg_view('input/text', array('name' => "subjects[]", 'value' => ""));
+       echo elgg_view('input/text', array('name' => "subjects[]", 'value' => "",'required' => true));
        echo "</div>";
        echo $divscores;
     echo elgg_echo('resume:education:score');
       echo elgg_echo('resume:*');
-       echo elgg_view('input/text', array('name' => "scores[]", 'value' => ""));
+       echo elgg_view('input/text', array('name' => "scores[]", 'value' => "",'required' => true));
        echo "</div>";
        echo $divhours;
     echo elgg_echo('resume:education:hour');
       echo elgg_echo('resume:*');
-       echo elgg_view('input/text', array('name' => "hours[]", 'value' => ""));
+       echo elgg_view('input/text', array('name' => "hours[]", 'value' => "",'required' => true));
        echo '</div><div class="clearfloat"></div>';
        
        echo $divtypes;
@@ -316,7 +320,7 @@ function removeElement(parentDiv, childDiv){
        echo elgg_view('input/dropdown', 
               array('name' => 'types[]', 
                   'options_values' => $credittypes, 
-                  'value' => ""));       
+                  'value' => "",'required' => true));       
        echo "</div>";
        echo $divstarts;
     echo elgg_echo('resume:education:starts');
@@ -340,17 +344,17 @@ function removeElement(parentDiv, childDiv){
        echo $j . ". ";
        echo elgg_echo('resume:education:subject');
       echo elgg_echo('resume:*');
-       echo elgg_view('input/text', array('name' => "subjects[]", 'value' => $subjects_array[$i]));
+       echo elgg_view('input/text', array('name' => "subjects[]", 'value' => $subjects_array[$i],'required' => true));
        echo "</div>";
        echo $divscores;
     echo elgg_echo('resume:education:score');
       echo elgg_echo('resume:*');
-       echo elgg_view('input/text', array('name' => "scores[]", 'value' => $scores_array[$i]));
+       echo elgg_view('input/text', array('name' => "scores[]", 'value' => $scores_array[$i],'required' => true));
        echo "</div>";
        echo $divhours;
     echo elgg_echo('resume:education:hour');
       echo elgg_echo('resume:*');
-       echo elgg_view('input/text', array('name' => "hours[]", 'value' => $hours_array[$i]));
+       echo elgg_view('input/text', array('name' => "hours[]", 'value' => $hours_array[$i],'required' => true));
        echo '</div><div class="clearfloat"></div>';
        
        echo $divtypes;
@@ -359,7 +363,7 @@ function removeElement(parentDiv, childDiv){
       echo elgg_view('input/dropdown', 
               array('name' => 'types[]', 
                   'options_values' => $credittypes, 
-                  'value' => $types_array[$i]));     
+                  'value' => $types_array[$i],'required' => true));     
        echo "</div>";
        echo $divstarts;
     echo elgg_echo('resume:education:starts');

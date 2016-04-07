@@ -1,0 +1,5 @@
+Change fields to required
+Printable format is not working
+Add information related to Indian education system
+Fix link to open the e-portfolio
+Fix river add post

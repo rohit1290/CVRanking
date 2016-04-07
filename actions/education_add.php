@@ -2,7 +2,7 @@
 
 // only logged in users can add and object
 gatekeeper();
-
+$dbprefix = elgg_get_config('dbprefix');
 // get the form input
 $startdate = get_input('startdate');
 $enddate = get_input('enddate');
@@ -47,13 +47,13 @@ $students = get_input('students');
        
     // ADD TO DATABASE ONLY IF COUNTRY IS SET, TO AVOID DUPLICITY!
     if (($structure2) && ($country)) {
-          $query = "SELECT * FROM {$CONFIG->dbprefix}university_entity
+          $query = "SELECT * FROM ".$dbprefix."university_entity
           WHERE name='$structure2'";
           $university = get_data_row($query);
           $unicountry = $university->country; 
           // Only if it is NOT ALREADY in the DB
           if (!($university) || ($unicountry != $country)) {
-  	      $query = "INSERT INTO university_entity 
+  	      $query = "INSERT INTO ".$dbprefix."university_entity 
           	  SET name='$structure2', type='$insttype', country='$country', 
                       budget='$budget', professors='$professors', students='$students', 
                       ranked='0'";

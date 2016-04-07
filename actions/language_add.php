@@ -43,12 +43,12 @@ $country = get_input('country');
      
       // ADD TO DATABASE IF EXAM2 IS SET
    if ($exam2) {
-          $query = "SELECT * FROM {$CONFIG->dbprefix}CVR_language_entity
+          $query = "SELECT * FROM ".elgg_get_config('dbprefix')."language_entity
           WHERE name='$exam2'";
           $language = get_data_row($query);
           // Only if it is NOT ALREADY in the DB
           if (!($language)) {
-  	      $query = "INSERT INTO {$CONFIG->dbprefix}CVR_language_entity 
+  	      $query = "INSERT INTO ".elgg_get_config('dbprefix')."language_entity 
           	  SET name='$exam2', level='$level',
                       students='$students', official='$official', valid='$valid',  
                       country='$country'";

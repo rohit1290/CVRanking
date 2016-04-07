@@ -8,7 +8,7 @@
 
  function maximalCVR($rating, $pageowner, $field, $branch="any") {
    
-   $query = "SELECT * FROM {$CONFIG->dbprefix}CVR_cv_rating WHERE field='$field' AND branch='$branch'";
+   $query = "SELECT * FROM ".elgg_get_config('dbprefix')."cv_rating WHERE field='$field' AND branch='$branch'";
    $performance = get_data_row($query);
    
   if ($performance) {
@@ -19,7 +19,7 @@
     }
     
     else { 
-  	    $query = "UPDATE {$CONFIG->dbprefix}CVR_cv_rating 
+  	    $query = "UPDATE ".elgg_get_config('dbprefix')."cv_rating 
           	  SET rating='$rating', user_id='$pageowner' 
           	  WHERE field='$field' AND branch='$branch'";
               update_data($query);
@@ -27,7 +27,7 @@
     }
   }
   else {
-  	$query = "INSERT INTO {$CONFIG->dbprefix}CVR_cv_rating 
+  	$query = "INSERT INTO ".elgg_get_config('dbprefix')."cv_rating 
           	  SET rating='$rating', user_id='$pageowner', field='$field', branch='$branch'";
               insert_data($query);
         $cvrrank = 100;

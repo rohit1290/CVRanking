@@ -141,13 +141,13 @@ if (($incomecap) || ($assetcap) || ($marketcap)) {
     
     // ADD TO DATABASE ONLY IF COUNTRY IS SET, TO AVOID DUPLICITY!
    if (($structure2) && ($country)) {
-          $query = "SELECT * FROM {$CONFIG->dbprefix}CVR_company_entity
+          $query = "SELECT * FROM ".elgg_get_config('dbprefix')."company_entity
           WHERE name='$structure2'";
           $company = get_data_row($query);
           $comcountry = $company->country; 
           // Only if it is NOT ALREADY in the DB
           if (!($company) || ($comcountry != $country)) {
-  	      $query = "INSERT INTO {$CONFIG->dbprefix}CVR_company_entity 
+  	      $query = "INSERT INTO ".elgg_get_config('dbprefix')."company_entity 
           	  SET name='$structure2', country='$country', 
                       incomecap='$incomecap', assetcap='$assetcap', marketcap='$marketcap', 
                       workers='$workers', industryclass='$industryclass2', total='$total', 

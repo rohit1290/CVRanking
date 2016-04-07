@@ -45,8 +45,8 @@ function addInput(divName){
           var newdiv = document.createElement('div');
           newdiv.id = 'parent' + counter;
           var bodyText = '<div id="child' + counter + '">';
-          bodyText += '<?php echo $divcerts;?><?php echo elgg_echo('resume:skill:cert'); echo elgg_echo('resume:*');?><input type="text" name="certs[]" value="" class="elgg-input-text"/></div>';
-          bodyText += '<?php echo $divscores;?><?php echo elgg_echo('resume:skill:score'); echo elgg_echo('resume:*');?><input type="text" name="scores[]" value="" class="elgg-input-text"/></div><div class="clearfloat"></div>';
+          bodyText += '<?php echo $divcerts;?><?php echo elgg_echo('resume:skill:cert'); echo elgg_echo('resume:*');?><input type="text" name="certs[]" value="" class="elgg-input-text" required/></div>';
+          bodyText += '<?php echo $divscores;?><?php echo elgg_echo('resume:skill:score'); echo elgg_echo('resume:*');?><input type="text" name="scores[]" value="" class="elgg-input-text" required/></div><div class="clearfloat"></div>';
           bodyText += '<?php echo $divstructures;?><?php echo elgg_echo('resume:skill:structure');?><input type="text" name="structures[]" value="" class="elgg-input-text"/></div>';
           bodyText += '<?php echo $divstarts;?><?php echo elgg_echo('resume:education:starts');?><br /><input type="text" name="starts' + counter + '" class="elgg-input-date popup_calendar" /></div>';
           bodyText += '<?php echo $divends;?><?php echo elgg_echo('resume:education:ends');?><br /><input type="text" name="ends' + counter + '" class="elgg-input-date popup_calendar" /></div>';
@@ -98,7 +98,7 @@ function removeElement(parentDiv, childDiv){
     <p>
       <?php echo elgg_echo('resume:skill:heading');  
       echo elgg_echo('resume:*');?><br />
-      <?php echo elgg_view('input/text', array('name' => 'heading', 'value' => $vars['entity']->heading)); ?>
+      <?php echo elgg_view('input/text', array('name' => 'heading', 'value' => $vars['entity']->heading,'required' => true)); ?>
     </p>
     
      <p>
@@ -107,7 +107,7 @@ function removeElement(parentDiv, childDiv){
       <?php echo elgg_view('input/dropdown', 
               array('name' => 'level', 
                   'options_values' => $levels, 
-                  'value' => $vars['entity']->level));
+                  'value' => $vars['entity']->level,'required' => true));
       ?>
      </p>
     
@@ -117,7 +117,7 @@ function removeElement(parentDiv, childDiv){
       <?php echo elgg_view('input/dropdown', 
               array('name' => 'skilltype', 
                   'options_values' => $skilltypes, 
-                  'value' => $vars['entity']->skilltype));
+                  'value' => $vars['entity']->skilltype,'required' => true));
       ?>
     </p>
     
@@ -132,12 +132,12 @@ function removeElement(parentDiv, childDiv){
        echo "1. ";
     echo elgg_echo('resume:skill:cert');
     echo elgg_echo('resume:*');
-       echo elgg_view('input/text', array('name' => "certs[]", 'value' => ""));
+       echo elgg_view('input/text', array('name' => "certs[]", 'value' => "",'required' => true));
        echo "</div>";
        echo $divscores;
     echo elgg_echo('resume:skill:score');
     echo elgg_echo('resume:*');
-       echo elgg_view('input/text', array('name' => "scores[]", 'value' => ""));
+       echo elgg_view('input/text', array('name' => "scores[]", 'value' => "",'required' => true));
        echo '</div><div class="clearfloat"></div>';
        
        echo $divstructures;
@@ -159,12 +159,12 @@ function removeElement(parentDiv, childDiv){
        echo "2. ";
     echo elgg_echo('resume:skill:cert');
     echo elgg_echo('resume:*');
-       echo elgg_view('input/text', array('name' => "certs[]", 'value' => ""));
+       echo elgg_view('input/text', array('name' => "certs[]", 'value' => "",'required' => true));
        echo "</div>";
        echo $divscores;
     echo elgg_echo('resume:skill:score');
     echo elgg_echo('resume:*');
-       echo elgg_view('input/text', array('name' => "scores[]", 'value' => ""));
+       echo elgg_view('input/text', array('name' => "scores[]", 'value' => "",'required' => true));
        echo '</div><div class="clearfloat"></div>';
        
        echo $divstructures;
@@ -190,12 +190,12 @@ function removeElement(parentDiv, childDiv){
        echo $j . ". ";
     echo elgg_echo('resume:skill:cert');
     echo elgg_echo('resume:*');
-       echo elgg_view('input/text', array('name' => "certs[]", 'value' => $certs_array[$i]));
+       echo elgg_view('input/text', array('name' => "certs[]", 'value' => $certs_array[$i],'required' => true));
        echo "</div>";
        echo $divscores;
     echo elgg_echo('resume:education:score');
     echo elgg_echo('resume:*');
-       echo elgg_view('input/text', array('name' => "scores[]", 'value' => $scores_array[$i]));
+       echo elgg_view('input/text', array('name' => "scores[]", 'value' => $scores_array[$i],'required' => true));
        echo '</div><div class="clearfloat"></div>';
        
        echo $divstructures;

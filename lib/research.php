@@ -286,7 +286,7 @@
           
        $score = $score1 * $advanced_values["WOK"] + $score2 * $advanced_values["GOOG"];
         
-          $scores_array[] = $score ;
+          $scores_array = array("$score") ;
      }    
    }
      //First, select the maximum score in research

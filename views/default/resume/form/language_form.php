@@ -11,6 +11,7 @@ if (defined('ACCESS_DEFAULT')) $access_id = ACCESS_DEFAULT;
 	require_once(dirname(dirname(__FILE__)) . "/lib/general.php");
 	require_once(dirname(dirname(__FILE__)) . "/lib/language.php");
 	require_once(dirname(dirname(__FILE__)) . "/lib/language_form.php");
+$dbprefix = elgg_get_config('dbprefix');
         
 $divexperience = '<div style="float:left; width:90%;">';
 $divexams = '<div style="float:left; width:47%; margin-right:15px">';
@@ -72,12 +73,12 @@ function addInput(divName){
           var newdiv = document.createElement('div');
           newdiv.id = 'parent' + counternew;
           var bodyText = '<div id="child' + counternew + '"><?php echo elgg_echo('resume:languages:examdata'); ?><br />';
-          bodyText += '<div style="float:left; width:55%;margin-right:15px"><?php echo elgg_echo('resume:languages:exam2'); echo elgg_echo('resume:*'); ?><br /><input type="text" name="exam2" value="" class="elgg-input-text"/></div>';
-          bodyText += '<div style="float:left; width:42%;"><?php echo elgg_echo('resume:languages:level'); echo elgg_echo('resume:*'); ?><br /><input type="text" name="level"  value="" class="elgg-input-text"/></div><div class="clearfloat"></div><br />'
+          bodyText += '<div style="float:left; width:55%;margin-right:15px"><?php echo elgg_echo('resume:languages:exam2'); echo elgg_echo('resume:*'); ?><br /><input type="text" name="exam2" value="" class="elgg-input-text" required/></div>';
+          bodyText += '<div style="float:left; width:42%;"><?php echo elgg_echo('resume:languages:level'); echo elgg_echo('resume:*'); ?><br /><input type="text" name="level"  value="" class="elgg-input-text" required/></div><div class="clearfloat"></div><br />'
           bodyText += '<div style="float:left; width:20%; margin-right:15px;"><?php echo elgg_echo('resume:languages:students'); ?><br /><input type="text" name="students" value="" class="elgg-input-text"/></div>'
           bodyText += '<div style="float:left; width:20%; margin-right:15px;"><?php echo elgg_echo('resume:languages:official'); ?><br /><input type="text" name="official" value="" class="elgg-input-text"/></div>'
           bodyText += '<div style="float:left; width:20%; margin-right:15px;"><?php echo elgg_echo('resume:languages:valid'); ?><br /><input type="text" name="valid" value="" class="elgg-input-text"/></div>'
-          bodyText += '<div style="float:left; width:30%;margin-top:5px"><?php echo elgg_echo('resume:education:country'); echo elgg_echo('resume:*'); ?><br /><select name="country" class="elgg-input-dropdown"><?php echo $country_options; ?></select></div>'
+          bodyText += '<div style="float:left; width:30%;margin-top:5px"><?php echo elgg_echo('resume:education:country'); echo elgg_echo('resume:*'); ?><br /><select name="country" class="elgg-input-dropdown" required><?php echo $country_options; ?></select></div>'
           bodyText +=  '<br /><br /><br /> <div align="right"><input type="button" class="elgg-button elgg-button-action" onClick="removeElement(\'parent' + counternew + '\', \'child' + counternew + '\')" value="<?php echo elgg_echo('resume:work:removefield'); ?>"></div></div><div class="clearfloat"></div><br />';
           newdiv.innerHTML = bodyText;
           document.getElementById(divName).appendChild(newdiv);
@@ -126,7 +127,7 @@ function removeElement(parentDiv, childDiv){
       <?php echo elgg_view('input/dropdown', 
               array('name' => 'language', 
                   'options_values' => $langs, 
-                  'value' => $vars['entity']->language));
+                  'value' => $vars['entity']->language,'required' => true));
       ?>
     </div>
     
@@ -136,7 +137,7 @@ function removeElement(parentDiv, childDiv){
        <?php echo elgg_view('input/dropdown', 
               array('name' => 'langtype', 
                   'options_values' => $langtypes, 
-                  'value' => $vars['entity']->langtype));
+                  'value' => $vars['entity']->langtype,'required' => true));
       ?>
     </div>
     
@@ -165,14 +166,14 @@ function removeElement(parentDiv, childDiv){
       echo elgg_echo('resume:*');?> 
       <a href="javascript:void(0);" class="inline_toggler" onclick="$('#resume_lang_listening').toggle();"><?php echo elgg_echo('resume:help'); ?></a>
       <div id="resume_lang_listening" style="display:none;"><?php echo elgg_echo('resume:languages:listening:help'); ?></div>
-      <?php echo elgg_view('input/dropdown', array('name' => 'listening', 'options_values' => $level_options, 'value' => $vars['entity']->listening)); ?>
+      <?php echo elgg_view('input/dropdown', array('name' => 'listening', 'options_values' => $level_options, 'value' => $vars['entity']->listening,'required' => true)); ?>
       <br />
       <br />
       <?php echo elgg_echo('resume:languages:reading'); 
       echo elgg_echo('resume:*');?>  
       <a href="javascript:void(0);" class="inline_toggler" onclick="$('#resume_lang_reading').toggle();"><?php echo elgg_echo('resume:help'); ?></a>
       <div id="resume_lang_reading" style="display:none;"><?php echo elgg_echo('resume:languages:reading:help'); ?></div>
-      <?php echo elgg_view('input/dropdown', array('name' => 'reading', 'options_values' => $level_options, 'value' => $vars['entity']->reading)); ?>
+      <?php echo elgg_view('input/dropdown', array('name' => 'reading', 'options_values' => $level_options, 'value' => $vars['entity']->reading,'required' => true)); ?>
     </div>
     
     <div style="float:left; width:33%;">
@@ -181,14 +182,14 @@ function removeElement(parentDiv, childDiv){
       echo elgg_echo('resume:*');?>  
       <a href="javascript:void(0);" class="inline_toggler" onclick="$('#resume_lang_spokeninteraction').toggle();"><?php echo elgg_echo('resume:help'); ?></a>
       <div id="resume_lang_spokeninteraction" style="display:none;"><?php echo elgg_echo('resume:languages:spokeninteraction:help'); ?></div>
-      <?php echo elgg_view('input/dropdown', array('name' => 'spokeninteraction', 'options_values' => $level_options, 'value' => $vars['entity']->spokeninteraction)); ?>
+      <?php echo elgg_view('input/dropdown', array('name' => 'spokeninteraction', 'options_values' => $level_options, 'value' => $vars['entity']->spokeninteraction,'required' => true)); ?>
       <br />
       <br />
       <?php echo elgg_echo('resume:languages:spokenproduction'); 
       echo elgg_echo('resume:*');?>  
       <a href="javascript:void(0);" class="inline_toggler" onclick="$('#resume_lang_spokenproduction').toggle();"><?php echo elgg_echo('resume:help'); ?></a>
       <div id="resume_lang_spokenproduction" style="display:none;"><?php echo elgg_echo('resume:languages:spokenproduction:help'); ?></div>
-      <?php echo elgg_view('input/dropdown', array('name' => 'spokenproduction', 'options_values' => $level_options, 'value' => $vars['entity']->spokenproduction)); ?>
+      <?php echo elgg_view('input/dropdown', array('name' => 'spokenproduction', 'options_values' => $level_options, 'value' => $vars['entity']->spokenproduction,'required' => true)); ?>
     </div>
     
     <div style="float:left; width:33%;">
@@ -196,7 +197,7 @@ function removeElement(parentDiv, childDiv){
       echo elgg_echo('resume:*');?> </h4>
       <a href="javascript:void(0);" class="inline_toggler" onclick="$('#resume_lang_writing').toggle();"><?php echo elgg_echo('resume:help'); ?></a><br/>
       <div id="resume_lang_writing" style="display:none;"><?php echo elgg_echo('resume:languages:writing:help'); ?></div>
-      <?php echo elgg_view('input/dropdown', array('name' => 'writing', 'options_values' => $level_options, 'value' => $vars['entity']->writing)); ?>
+      <?php echo elgg_view('input/dropdown', array('name' => 'writing', 'options_values' => $level_options, 'value' => $vars['entity']->writing,'required' => true)); ?>
     </div>
     
     <div class="clearfloat"></div><br />
@@ -290,7 +291,7 @@ echo elgg_view('input/autocomplete', array('name' => 'exams[1]', 'match_on' => '
        echo elgg_echo('resume:languages:exam');
        $examiname = "exams[".$i."]";
        $language = $exams_array[$i];
-       $query = "SELECT * FROM {$CONFIG->dbprefix}CVR_language_entity
+       $query = "SELECT * FROM ".$dbprefix."language_entity
                  WHERE language_id='$language'";
        $result = get_data_row($query);
        $comshow = $result->name; 

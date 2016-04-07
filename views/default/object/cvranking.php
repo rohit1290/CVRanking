@@ -58,7 +58,7 @@ if (!$compact) {
        // prove that $user is not blank before looping
          if ($user != "") {
            // take user guid
-           $query = "SELECT * FROM {$CONFIG->dbprefix}users_entity WHERE name='$user'";
+           $query = "SELECT * FROM ".elgg_get_config('dbprefix')."users_entity WHERE name='$user'";
            $user_object = get_data_row($query);
            $user_guid = $user_object->guid;
            // reset CVRs first

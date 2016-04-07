@@ -28,6 +28,7 @@ elgg_register_event_handler('init', 'system', 'resume_init');
 	require_once(dirname(__FILE__) . "/lib/skill.php");
 
 function resume_init() {
+elgg_register_page_handler('livesearch', 'resume_input_livesearch_page_handler');
     
   // Add menu item to logged users
   if (elgg_is_logged_in ()) { 
@@ -36,12 +37,7 @@ function resume_init() {
             'text' => elgg_echo('resume:menu:item'),
             'href' => 'resumes/' . elgg_get_logged_in_user_entity()->username
         ));
-    elgg_register_menu_item('topbar', array(
-            'name' => 'resume',
-            'text' => elgg_echo('resume:menu:item'),
-            //'text' => '<img src="' . elgg_get_site_url() .'mod/resume/graphics/curriculum_vitae_18.png" />',
-            'href' => 'resumes/' . elgg_get_logged_in_user_entity()->username
-        ));
+
   }
   // elgg_unregister_menu_item('topbar', 'elgg_logo');
   
@@ -54,7 +50,7 @@ function resume_init() {
   // add CVRanking view to profile -- seems to get double content?
   //elgg_extend_view('profile/status', 'resume/tab/resume');
 
-// Extend CSS with plugin's CSS
+  // Extend CSS with plugin's CSS
    $css_url = 'mod/resume/views/default/css/main.css';
    elgg_register_css('special', $css_url);
    elgg_load_css('special');
@@ -190,7 +186,7 @@ function resume_owner_block_menu($hook, $type, $return, $params) {
 
 /* Printed profile page */
 function printed_page_handler($page) {
-  echo elgg_view("page_elements/header"); ?>
+  //echo elgg_view("page_elements/header"); ?>
   <div class="resume_body_printer">
     <?php
 
@@ -226,6 +222,143 @@ if (!function_exists('unhtmlentities')) {
     return $chaineTmp; 
   }
 }
+
+/**
+ * Page handler for autocomplete endpoint.
+ *
+ * @todo split this into functions/objects, this is way too big
+ *
+ * /livesearch?q=<query>
+ *
+ * Other options include:
+ *     match_on	   string all or array(groups|users|friends)
+ *     match_owner int    0/1
+ *     limit       int    default is 10
+ *     name        string default "members"
+ *
+ * @param array $page
+ * @return string JSON string is returned and then exit
+ * @access private
+ */
+function resume_input_livesearch_page_handler($page) {
+	$dbprefix = elgg_get_config('dbprefix');
+
+	// only return results to logged in users.
+	if (!$user = elgg_get_logged_in_user_entity()) {
+		exit;
+	}
+
+	if (!$q = get_input('term', get_input('q'))) {
+		exit;
+	}
+
+	$input_name = get_input('name', 'members');
+
+	$q = sanitise_string($q);
+
+	// replace mysql vars with escaped strings
+	$q = str_replace(array('_', '%'), array('\_', '\%'), $q);
+
+	$match_on = get_input('match_on', 'all');
+
+	if (!is_array($match_on)) {
+		$match_on = array($match_on);
+	}
+
+	// all = users and groups
+	if (in_array('all', $match_on)) {
+		$match_on = array('users', 'groups');
+	}
+
+	$owner_guid = ELGG_ENTITIES_ANY_VALUE;
+	if (get_input('match_owner', false)) {
+		$owner_guid = $user->getGUID();
+	}
+
+	$limit = sanitise_int(get_input('limit', elgg_get_config('default_limit')));
+
+	// grab a list of entities and send them in json.
+	$results = array();
+	foreach ($match_on as $match_type) {
+		switch ($match_type) {
+				case 'universities':
+				$query = "SELECT * FROM ".$dbprefix."university_entity as une
+					WHERE une.name LIKE '%$q%'
+					LIMIT $limit
+				";
+
+				if ($entities = get_data($query)) {
+					foreach ($entities as $entity) {
+						$result = array(
+							'type' => 'university',
+							'name' => $entity->name,
+							'desc' => $entity->country,
+							'guid' => $entity->university_id,
+							'value' => $entity->name,
+							'icon' => $icon,
+						);
+						$results[$entity->name . rand(1, 100)] = $result;
+					}
+				}
+                                
+				break;
+                              
+                          case 'companies':
+				$query = "SELECT * FROM ".$dbprefix."company_entity as une
+					WHERE une.name LIKE '%$q%'
+					LIMIT $limit
+				";
+
+				if ($entities = get_data($query)) {
+					foreach ($entities as $entity) {
+						$result = array(
+							'type' => 'company',
+							'name' => $entity->name,
+							'desc' => $entity->country,
+							'guid' => $entity->company_id,
+							'value' => $entity->name,
+							'icon' => $icon,
+						);
+						$results[$entity->name . rand(1, 100)] = $result;
+					}
+				}
+				break;
+                                
+                          case 'languages':
+				$query = "SELECT * FROM ".$dbprefix."language_entity as une
+					WHERE une.name LIKE '%$q%'
+					LIMIT $limit
+				";
+                                if ($entities = get_data($query)) {
+					foreach ($entities as $entity) {
+						$result = array(
+							'type' => 'language',
+							'name' => $entity->name,
+							'desc' => $entity->level,
+							'guid' => $entity->language_id,
+							'value' => $entity->name,
+							'icon' => $icon,
+						);
+						$results[$entity->name . rand(1, 100)] = $result;
+					}
+				}
+				break;
+				
+			default:
+				header("HTTP/1.0 400 Bad Request", true);
+				echo "livesearch: unknown match_on of $match_type";
+				exit;
+				break;
+		}
+	}
+
+	ksort($results);
+	header("Content-Type: application/json");
+	echo json_encode(array_values($results));
+	exit;
+}
+
+
   
 // ******************** REGISTER ACTIONS ******************
 elgg_register_action("resume/delete", elgg_get_plugins_path() . "resume/actions/delete.php");

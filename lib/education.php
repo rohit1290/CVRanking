@@ -35,7 +35,7 @@
     $university_id = $ratedobject->structure;
       // get the name of the university
       if ($university_id) {
-         $query = "SELECT * FROM {$CONFIG->dbprefix}CVR_university_entity WHERE university_id='$university_id'";
+         $query = "SELECT * FROM ".elgg_get_config('dbprefix')."university_entity WHERE university_id='$university_id'";
          $result = get_data_row($query);
          $university = $result->name;
          $country = $result->country;
@@ -67,7 +67,7 @@
          // 1st rating:
            // if structure ($university) is defined, search for it
         if ($university) {
-           $query = "SELECT * FROM {$CONFIG->dbprefix}$university_ranking WHERE university='$university' AND field='$branch'";
+           $query = "SELECT * FROM ".elgg_get_config('dbprefix')."university_ranking WHERE university='$university' AND field='$branch'";
            $performance1 = get_data_row($query);
            $rating1 = $performance1->rating; 
         }
@@ -78,7 +78,7 @@
           
          // 2nd rating:
          if ($university) {
-            $query = "SELECT * FROM {$CONFIG->dbprefix}$university_ranking WHERE university='$university' AND field='gen'";
+            $query = "SELECT * FROM ".elgg_get_config('dbprefix')."university_ranking WHERE university='$university' AND field='gen'";
    	    $performance2 = get_data_row($query);
             $rating2 = $performance2->rating;
          }
@@ -100,7 +100,7 @@
       else {
          if ($university) {
  // IMPORTANT - if database uses country (NOT university), then use country='$country'
-         $query = "SELECT * FROM {$CONFIG->dbprefix}$university_ranking WHERE university='$university'";
+         $query = "SELECT * FROM ".elgg_get_config('dbprefix')."university_ranking WHERE university='$university'";
          $performance = get_data_row($query);
          $rating = $performance->rating; 
          }

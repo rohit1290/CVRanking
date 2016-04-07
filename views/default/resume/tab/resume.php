@@ -9,7 +9,7 @@
  * @todo : Allow for import of user-defined CVR objects and immediate use of set_cvrvalues(), either in plugins/widgets,
  *         or from external sources (using exported data from Elgg).
  */
-$page_owner = $vars['owner'];
+$page_owner = elgg_get_page_owner_entity()->name;
 echo $page_owner; 
 $collapsed= true;
 

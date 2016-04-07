@@ -13,7 +13,7 @@
 	 */
 
   function workcvrate($ratedobject, $cvr_arrays) {
-     
+     $dbprefix = elgg_get_config('dbprefix');
       // GET arrays of selected values
       $advanced_values = $cvr_arrays['advanced_values'];
       $sectors = $cvr_arrays['sectors'];
@@ -35,7 +35,7 @@
     $company_id = $ratedobject->structure;
       // get the name of the university
       if ($company_id) {
-         $query = "SELECT * FROM {$CONFIG->dbprefix}CVR_company_entity WHERE company_id='$company_id'";
+         $query = "SELECT * FROM ".$dbprefix."company_entity WHERE company_id='$company_id'";
          $result = get_data_row($query);
          $company = $result->name;
          $country = $result->country;
@@ -90,7 +90,7 @@
               // query for max value plus log
                 // either take maximum wage from database (too risky, too much change)
                 // or take a maximum expected wage...
-                  //$query = "SELECT MAX(total) as total FROM {$CONFIG->dbprefix}$company_ranking WHERE industryclass='$industryclass' ";
+                  //$query = "SELECT MAX(total) as total FROM ".elgg_get_config('dbprefix')."company_ranking WHERE industryclass='$industryclass' ";
                   //$result = get_data_row($query);
                 // COULD BE WRONG - DATA_ROW GETS ARRAY, NOT OBJECT??
                  //$maxlog = log($result["total"]);
@@ -100,7 +100,7 @@
                $rating = $capital/$maxlog * 100;
              }   
              else {
-             $query = "SELECT * FROM {$CONFIG->dbprefix}$company_ranking WHERE university='$company'";
+             $query = "SELECT * FROM ".elgg_get_config('dbprefix')."company_ranking WHERE university='$company'";
              $performance = get_data_row($query);
                $rating = $performance->rating; 
              }
@@ -247,7 +247,7 @@
           // convert scores to a scale 0-100
           $score = (log($score))/$maxwage * 100;
          
-          $scores_array[] = $score;
+          $scores_array = array("$score");
       }
      }
      //First, select the maximum wage/week in scores

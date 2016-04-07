@@ -57,18 +57,18 @@ function addInput(divName){
           var newdiv = document.createElement('div');
           newdiv.id = 'parent' + counter;
           var bodyText = '<div id="child' + counter + '">';
-          bodyText += '<?php echo $divarticles;?><?php echo elgg_echo('resume:research:article'); echo elgg_echo('resume:*');?><input type="text" name="articles[]" value="" class="elgg-input-text"/></div>';
-          bodyText += '<?php echo $divcitations;?><?php echo elgg_echo('resume:research:citation'); echo elgg_echo('resume:*');?><input type="text" name="citations[]" value="" class="elgg-input-text"/></div>';
-          bodyText += '<?php echo $divmaxcitations;?><?php echo elgg_echo('resume:research:maxcit'); echo elgg_echo('resume:*');?><input type="text" name="maxcitations[]" value="" class="elgg-input-text"/></div>';
+          bodyText += '<?php echo $divarticles;?><?php echo elgg_echo('resume:research:article'); echo elgg_echo('resume:*');?><input type="text" name="articles[]" value="" class="elgg-input-text" required/></div>';
+          bodyText += '<?php echo $divcitations;?><?php echo elgg_echo('resume:research:citation'); echo elgg_echo('resume:*');?><input type="text" name="citations[]" value="" class="elgg-input-text" required/></div>';
+          bodyText += '<?php echo $divmaxcitations;?><?php echo elgg_echo('resume:research:maxcit'); echo elgg_echo('resume:*');?><input type="text" name="maxcitations[]" value="" class="elgg-input-text" required/></div>';
          bodyText += '<div class="clearfloat"></div>'
-          bodyText += '<?php echo $divjournals;?><?php echo elgg_echo('resume:research:journal'); echo elgg_echo('resume:*');?><input type="text" name="journals[]" value="" class="elgg-input-text"/></div>';
-          bodyText += '<?php echo $divimpacts;?><?php echo elgg_echo('resume:research:impact'); echo elgg_echo('resume:*');?><input type="text" name="impacts[]" value="" class="elgg-input-text"/></div>';
-          bodyText += '<?php echo $divmaximpacts;?><?php echo elgg_echo('resume:research:max'); echo elgg_echo('resume:*');?><input type="text" name="maximpacts[]" value="" class="elgg-input-text"/></div>';
+          bodyText += '<?php echo $divjournals;?><?php echo elgg_echo('resume:research:journal'); echo elgg_echo('resume:*');?><input type="text" name="journals[]" value="" class="elgg-input-text" required/></div>';
+          bodyText += '<?php echo $divimpacts;?><?php echo elgg_echo('resume:research:impact'); echo elgg_echo('resume:*');?><input type="text" name="impacts[]" value="" class="elgg-input-text" required/></div>';
+          bodyText += '<?php echo $divmaximpacts;?><?php echo elgg_echo('resume:research:max'); echo elgg_echo('resume:*');?><input type="text" name="maximpacts[]" value="" class="elgg-input-text" required/></div>';
          bodyText += '<div class="clearfloat"></div>'
-          bodyText += '<?php echo $diveigens;?><?php echo elgg_echo('resume:research:eigen'); echo elgg_echo('resume:*');?><input type="text" name="eigens[]" value="" class="elgg-input-text"/></div>';
-          bodyText += '<?php echo $divmaxeigens;?><?php echo elgg_echo('resume:research:max'); echo elgg_echo('resume:*');?><input type="text" name="maxeigens[]" value="" class="elgg-input-text"/></div>';
-          bodyText += '<?php echo $divauthors;?><?php echo elgg_echo('resume:research:author'); echo elgg_echo('resume:*');?><input type="text" name="authors[]" value="" class="elgg-input-text"/></div>';
-          bodyText += '<?php echo $divpositions;?><?php echo elgg_echo('resume:research:position'); echo elgg_echo('resume:*');?><input type="text" name="positions[]" value="" class="elgg-input-text"/></div>';
+          bodyText += '<?php echo $diveigens;?><?php echo elgg_echo('resume:research:eigen'); echo elgg_echo('resume:*');?><input type="text" name="eigens[]" value="" class="elgg-input-text" required/></div>';
+          bodyText += '<?php echo $divmaxeigens;?><?php echo elgg_echo('resume:research:max'); echo elgg_echo('resume:*');?><input type="text" name="maxeigens[]" value="" class="elgg-input-text" required/></div>';
+          bodyText += '<?php echo $divauthors;?><?php echo elgg_echo('resume:research:author'); echo elgg_echo('resume:*');?><input type="text" name="authors[]" value="" class="elgg-input-text" required/></div>';
+          bodyText += '<?php echo $divpositions;?><?php echo elgg_echo('resume:research:position'); echo elgg_echo('resume:*');?><input type="text" name="positions[]" value="" class="elgg-input-text" required/></div>';
           bodyText += '<?php echo $divends;?><?php echo elgg_echo('resume:research:ends');?><br /><input type="text" name="ends' + counter + '" class="elgg-input-date popup_calendar" /></div>';
           bodyText +=  '<br /><br /><br /> <div align="right"><input type="button" class="elgg-button elgg-button-action" onClick="removeElement(\'parent' + counter + '\', \'child' + counter + '\')" value="<?php echo elgg_echo('resume:research:removearticle'); ?>"></div></div><div class="divsubobject"></div><br />';
           newdiv.innerHTML = bodyText;
@@ -118,7 +118,7 @@ function removeElement(parentDiv, childDiv){
     <p>
       <?php echo elgg_echo('resume:research:heading'); 
       echo elgg_echo('resume:*');?><br />
-      <?php echo elgg_view('input/text', array('name' => 'heading', 'value' => $vars['entity']->heading)); ?>
+      <?php echo elgg_view('input/text', array('name' => 'heading', 'value' => $vars['entity']->heading,'required' => true)); ?>
     </p>
     
     <div style="float:left; width:90%;">
@@ -127,13 +127,13 @@ function removeElement(parentDiv, childDiv){
      <?php 
       if (isset($vars['entity'])){
          $university = $vars['entity']->structure;
-            $query = "SELECT * FROM {$CONFIG->dbprefix}CVR_university_entity
+            $query = "SELECT * FROM ".elgg_get_config('dbprefix')."university_entity
                      WHERE university_id='$university'";
             $result = get_data_row($query);
               $uniname = $result->name; 
       }
       echo elgg_view('input/autocomplete', array('name' => 'structure', 'match_on' => 'universities',
-          'value' => $vars['entity']->structure, 'value_show' => $uniname)); ?>
+          'value' => $vars['entity']->structure, 'value_show' => $uniname,'required' => true)); ?>
         </div>
     
     <div class="clearfloat"></div><br />
@@ -145,7 +145,7 @@ function removeElement(parentDiv, childDiv){
       <?php echo elgg_view('input/dropdown', 
               array('name' => 'level', 
                   'options_values' => $levels, 
-                  'value' => $vars['entity']->level));
+                  'value' => $vars['entity']->level,'required' => true));
       ?>
      </div>
    
@@ -158,7 +158,7 @@ function removeElement(parentDiv, childDiv){
       <?php echo elgg_view('input/dropdown', 
               array('name' => 'field', 
                   'options_values' => $resfields, 
-                  'value' => $vars['entity']->field));
+                  'value' => $vars['entity']->field,'required' => true));
       ?>
     </div>
     
@@ -194,54 +194,54 @@ function removeElement(parentDiv, childDiv){
        echo "1. ";
     echo elgg_echo('resume:research:article');
     echo elgg_echo('resume:*');
-       echo elgg_view('input/text', array('name' => "articles[]", 'value' => ""));
+       echo elgg_view('input/text', array('name' => "articles[]", 'value' => "",'required' => true));
        echo "</div>";
        echo $divcitations;
     echo elgg_echo('resume:research:citation');
     echo elgg_echo('resume:*');
-       echo elgg_view('input/text', array('name' => "citations[]", 'value' => ""));
+       echo elgg_view('input/text', array('name' => "citations[]", 'value' => "",'required' => true));
        echo "</div>";
        echo $divmaxcitations;
     echo elgg_echo('resume:research:maxcit');
     echo elgg_echo('resume:*');
-       echo elgg_view('input/text', array('name' => "maxcitations[]", 'value' => ""));
+       echo elgg_view('input/text', array('name' => "maxcitations[]", 'value' => "",'required' => true));
        echo '</div><div class="clearfloat"></div>';
        
        echo $divjournals;
     echo elgg_echo('resume:research:journal');
     echo elgg_echo('resume:*');
-       echo elgg_view('input/text', array('name' => "journals[]", 'value' => ""));
+       echo elgg_view('input/text', array('name' => "journals[]", 'value' => "",'required' => true));
        echo "</div>";
        echo $divimpacts;
     echo elgg_echo('resume:research:impact');
     echo elgg_echo('resume:*');
-       echo elgg_view('input/text', array('name' => "impacts[]", 'value' => ""));
+       echo elgg_view('input/text', array('name' => "impacts[]", 'value' => "",'required' => true));
        echo "</div>";
        echo $divmaximpacts;
     echo elgg_echo('resume:research:max');
     echo elgg_echo('resume:*');
-       echo elgg_view('input/text', array('name' => "maximpacts[]", 'value' => ""));
+       echo elgg_view('input/text', array('name' => "maximpacts[]", 'value' => "",'required' => true));
        echo '</div><div class="clearfloat"></div>';
        
        echo $diveigens;
     echo elgg_echo('resume:research:eigen');
     echo elgg_echo('resume:*');
-       echo elgg_view('input/text', array('name' => "eigens[]", 'value' => ""));
+       echo elgg_view('input/text', array('name' => "eigens[]", 'value' => "",'required' => true));
        echo "</div>";
        echo $divmaxeigens;
     echo elgg_echo('resume:research:max');
     echo elgg_echo('resume:*');
-       echo elgg_view('input/text', array('name' => "maxeigens[]", 'value' => ""));
+       echo elgg_view('input/text', array('name' => "maxeigens[]", 'value' => "",'required' => true));
        echo "</div>";
        echo $divauthors;
     echo elgg_echo('resume:research:author');
     echo elgg_echo('resume:*');
-       echo elgg_view('input/text', array('name' => "authors[]", 'value' => ""));
+       echo elgg_view('input/text', array('name' => "authors[]", 'value' => "",'required' => true));
        echo "</div>";
        echo $divpositions;
     echo elgg_echo('resume:research:position');
     echo elgg_echo('resume:*');
-       echo elgg_view('input/text', array('name' => "positions[]", 'value' => ""));
+       echo elgg_view('input/text', array('name' => "positions[]", 'value' => "",'required' => true));
        echo "</div>"; 
        echo $divends;
     echo elgg_echo('resume:research:ends');
@@ -254,54 +254,54 @@ function removeElement(parentDiv, childDiv){
        echo "2. ";
     echo elgg_echo('resume:research:article');
     echo elgg_echo('resume:*');
-       echo elgg_view('input/text', array('name' => "articles[]", 'value' => ""));
+       echo elgg_view('input/text', array('name' => "articles[]", 'value' => "",'required' => true));
        echo "</div>";
        echo $divcitations;
     echo elgg_echo('resume:research:citation');
     echo elgg_echo('resume:*');
-       echo elgg_view('input/text', array('name' => "citations[]", 'value' => ""));
+       echo elgg_view('input/text', array('name' => "citations[]", 'value' => "",'required' => true));
        echo "</div>";
        echo $divmaxcitations;
     echo elgg_echo('resume:research:maxcit');
     echo elgg_echo('resume:*');
-       echo elgg_view('input/text', array('name' => "maxcitations[]", 'value' => ""));
+       echo elgg_view('input/text', array('name' => "maxcitations[]", 'value' => "",'required' => true));
        echo '</div><div class="clearfloat"></div>';
        
        echo $divjournals;
     echo elgg_echo('resume:research:journal');
     echo elgg_echo('resume:*');
-       echo elgg_view('input/text', array('name' => "journals[]", 'value' => ""));
+       echo elgg_view('input/text', array('name' => "journals[]", 'value' => "",'required' => true));
        echo "</div>";
        echo $divimpacts;
     echo elgg_echo('resume:research:impact');
     echo elgg_echo('resume:*');
-       echo elgg_view('input/text', array('name' => "impacts[]", 'value' => ""));
+       echo elgg_view('input/text', array('name' => "impacts[]", 'value' => "",'required' => true));
        echo "</div>";
        echo $divmaximpacts;
     echo elgg_echo('resume:research:max');
     echo elgg_echo('resume:*');
-       echo elgg_view('input/text', array('name' => "maximpacts[]", 'value' => ""));
+       echo elgg_view('input/text', array('name' => "maximpacts[]", 'value' => "",'required' => true));
        echo '</div><div class="clearfloat"></div>';
        
        echo $diveigens;
     echo elgg_echo('resume:research:eigen');
     echo elgg_echo('resume:*');
-       echo elgg_view('input/text', array('name' => "eigens[]", 'value' => ""));
+       echo elgg_view('input/text', array('name' => "eigens[]", 'value' => "",'required' => true));
        echo "</div>";
        echo $divmaxeigens;
     echo elgg_echo('resume:research:max');
     echo elgg_echo('resume:*');
-       echo elgg_view('input/text', array('name' => "maxeigens[]", 'value' => ""));
+       echo elgg_view('input/text', array('name' => "maxeigens[]", 'value' => "",'required' => true));
        echo "</div>";
        echo $divauthors;
     echo elgg_echo('resume:research:author');
     echo elgg_echo('resume:*');
-       echo elgg_view('input/text', array('name' => "authors[]", 'value' => ""));
+       echo elgg_view('input/text', array('name' => "authors[]", 'value' => "",'required' => true));
        echo "</div>";
        echo $divpositions;
     echo elgg_echo('resume:research:position');
     echo elgg_echo('resume:*');
-       echo elgg_view('input/text', array('name' => "positions[]", 'value' => ""));
+       echo elgg_view('input/text', array('name' => "positions[]", 'value' => "",'required' => true));
        echo "</div>"; 
        echo $divends;
     echo elgg_echo('resume:research:ends');
@@ -320,54 +320,54 @@ function removeElement(parentDiv, childDiv){
        echo $j . ". ";
     echo elgg_echo('resume:research:article');
     echo elgg_echo('resume:*');
-       echo elgg_view('input/text', array('name' => "articles[]", 'value' => $articles_array[$i]));
+       echo elgg_view('input/text', array('name' => "articles[]", 'value' => $articles_array[$i],'required' => true));
        echo "</div>";
        echo $divcitations;
     echo elgg_echo('resume:research:citation');
     echo elgg_echo('resume:*');
-       echo elgg_view('input/text', array('name' => "citations[]", 'value' => $citations_array[$i]));
+       echo elgg_view('input/text', array('name' => "citations[]", 'value' => $citations_array[$i],'required' => true));
        echo "</div>";
        echo $divmaxcitations;
     echo elgg_echo('resume:research:maxcit');
     echo elgg_echo('resume:*');
-       echo elgg_view('input/text', array('name' => "maxcitations[]", 'value' => $maxcitations_array[$i]));
+       echo elgg_view('input/text', array('name' => "maxcitations[]", 'value' => $maxcitations_array[$i],'required' => true));
        echo '</div><div class="clearfloat"></div>';
        
        echo $divjournals;
     echo elgg_echo('resume:research:journal');
     echo elgg_echo('resume:*');
-       echo elgg_view('input/text', array('name' => "journals[]", 'value' => $journals_array[$i]));
+       echo elgg_view('input/text', array('name' => "journals[]", 'value' => $journals_array[$i],'required' => true));
        echo "</div>";
        echo $divimpacts;
     echo elgg_echo('resume:research:impact');
     echo elgg_echo('resume:*');
-       echo elgg_view('input/text', array('name' => "impacts[]", 'value' => $impacts_array[$i]));
+       echo elgg_view('input/text', array('name' => "impacts[]", 'value' => $impacts_array[$i],'required' => true));
        echo "</div>";
        echo $divmaximpacts;
     echo elgg_echo('resume:research:max');
     echo elgg_echo('resume:*');
-       echo elgg_view('input/text', array('name' => "maximpacts[]", 'value' => $maximpacts_array[$i]));
+       echo elgg_view('input/text', array('name' => "maximpacts[]", 'value' => $maximpacts_array[$i],'required' => true));
        echo '</div><div class="clearfloat"></div>';
        
        echo $diveigens;
     echo elgg_echo('resume:research:eigen');
     echo elgg_echo('resume:*');
-       echo elgg_view('input/text', array('name' => "eigens[]", 'value' => $eigens_array[$i]));
+       echo elgg_view('input/text', array('name' => "eigens[]", 'value' => $eigens_array[$i],'required' => true));
        echo "</div>";
        echo $divmaxeigens;
     echo elgg_echo('resume:research:max');
     echo elgg_echo('resume:*');
-       echo elgg_view('input/text', array('name' => "maxeigens[]", 'value' => $maxeigens_array[$i]));
+       echo elgg_view('input/text', array('name' => "maxeigens[]", 'value' => $maxeigens_array[$i],'required' => true));
        echo "</div>";
        echo $divauthors;
     echo elgg_echo('resume:research:author');
     echo elgg_echo('resume:*');
-       echo elgg_view('input/text', array('name' => "authors[]", 'value' => $authors_array[$i]));
+       echo elgg_view('input/text', array('name' => "authors[]", 'value' => $authors_array[$i],'required' => true));
        echo "</div>";
        echo $divpositions;
     echo elgg_echo('resume:research:position');
     echo elgg_echo('resume:*');
-       echo elgg_view('input/text', array('name' => "positions[]", 'value' => $positions_array[$i]));
+       echo elgg_view('input/text', array('name' => "positions[]", 'value' => $positions_array[$i],'required' => true));
        echo "</div>"; 
        echo $divends;
     echo elgg_echo('resume:research:ends');
