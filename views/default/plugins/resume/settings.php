@@ -1,6 +1,19 @@
 <?php
 global $CONFIG;
 $yesno_opt = array('no' => elgg_echo('resume:settings:no'), 'yes' => elgg_echo('resume:settings:yes'));
+$site_url = elgg_get_site_url();
+
+echo "<blockquote>";
+echo '<br>&nbsp;&nbsp;&nbsp;<label style="clear:left;">'.elgg_echo("Install/Delete tables related to this plugin").'</label><hr>';
+// Delete Table and Install Structure
+echo '<br />&nbsp;&nbsp;&nbsp;<label style="clear:left;">' . elgg_echo('<a href="'.$site_url.'mod/resume/sql/install_cvranking_structure.php" target="_blank">Click here to install the database table for this plugin</a>') . '</label> ';
+echo '<p>&nbsp;&nbsp;&nbsp;' . elgg_echo('The above link will delete the tables and their data related to this plugin and install a fresh copy of the table structure.') . '</p>';
+
+//
+echo '<br />&nbsp;&nbsp;&nbsp;<label style="clear:left;">' . elgg_echo('<a href="'.$site_url.'mod/resume/sql/drop_table.php" target="_blank">Click here to delete the database table for this plugin</a>') . '</label> ';
+echo '<p>&nbsp;&nbsp;&nbsp;' . elgg_echo('The above link will delete the tables and their data related to this plugin.') . '</p><br>';
+
+echo "</blockquote>";
 
 // cvranking
 echo '<br /><label style="clear:left;">' . elgg_echo('resume:settings:cvranking') . '</label> ';

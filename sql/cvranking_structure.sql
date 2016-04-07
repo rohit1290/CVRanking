@@ -7,8 +7,8 @@
 -- Server version: 5.5.16
 -- PHP Version: 5.3.8
 
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
+SET SQL_MODE='NO_AUTO_VALUE_ON_ZERO';
+SET time_zone = '+00:00';
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -23,10 +23,10 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `CVR_company_entity`
+-- Table structure for table `ck_company_entity`
 --
 
-CREATE TABLE IF NOT EXISTS `CVR_company_entity` (
+CREATE TABLE IF NOT EXISTS `ck_company_entity` (
   `company_id` int(3) NOT NULL AUTO_INCREMENT,
   `name` varchar(103) DEFAULT NULL,
   `country` varchar(21) DEFAULT NULL,
@@ -44,10 +44,10 @@ CREATE TABLE IF NOT EXISTS `CVR_company_entity` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `CVR_cv_rating`
+-- Table structure for table `ck_cv_rating`
 --
 
-CREATE TABLE IF NOT EXISTS `CVR_cv_rating` (
+CREATE TABLE IF NOT EXISTS `ck_cv_rating` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `field` tinytext COLLATE utf8_unicode_ci NOT NULL,
   `branch` tinytext COLLATE utf8_unicode_ci NOT NULL,
@@ -59,10 +59,10 @@ CREATE TABLE IF NOT EXISTS `CVR_cv_rating` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `CVR_language_entity`
+-- Table structure for table `ck_language_entity`
 --
 
-CREATE TABLE IF NOT EXISTS `CVR_language_entity` (
+CREATE TABLE IF NOT EXISTS `ck_language_entity` (
   `language_id` int(2) DEFAULT NULL,
   `name_id` varchar(13) DEFAULT NULL,
   `name` varchar(64) DEFAULT NULL,
@@ -77,10 +77,10 @@ CREATE TABLE IF NOT EXISTS `CVR_language_entity` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `CVR_QS12`
+-- Table structure for table `ck_QS12`
 --
 
-CREATE TABLE IF NOT EXISTS `CVR_QS12` (
+CREATE TABLE IF NOT EXISTS `ck_QS12` (
   `university_id` int(4) DEFAULT NULL,
   `university` varchar(103) DEFAULT NULL,
   `country` varchar(21) DEFAULT NULL,
@@ -91,10 +91,10 @@ CREATE TABLE IF NOT EXISTS `CVR_QS12` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `CVR_university_entity`
+-- Table structure for table `ck_university_entity`
 --
 
-CREATE TABLE IF NOT EXISTS `CVR_university_entity` (
+CREATE TABLE IF NOT EXISTS `ck_university_entity` (
   `university_id` int(3) NOT NULL AUTO_INCREMENT,
   `type` varchar(21) DEFAULT NULL,
   `name` varchar(103) DEFAULT NULL,
