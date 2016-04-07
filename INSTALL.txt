@@ -13,7 +13,7 @@ To install this Elgg plugin, you need to follow the next steps.
 == 1. Activation and settings ==
 
 Copy the /resume folder to the /mod file in your Elgg directory.
-Activate the plugin in the Administration>Plugin site.
+Activate the plugin in the Administration > Plugin site.
 Settings:
 * You can turn on the different types/aspects (by selecting "Yes" from the dropdown menu): education, workexperience, language, research, publication, skill. 
 * If you turn on CV Ranking, the default home page of the ePortfolio will be a summary of the user's (standard) CVR.
@@ -26,8 +26,8 @@ SQL files are available in the mod/sql folder.
 If you want to use all the databases that we are currently testing, import the file cvranking.sql
 
 If you are going to use the databases to obtain CVR calculations - and also if you want the autocomplete fields to work -,
-but don't want to use the data we provide, you should at least import the cvranking_structure.sql file to your database.
+but don't want to use the data we provide, you should visit the administration setting page and click on "Install".
 
 == 3. Profile Manager fields ==
 
-(A standard profile field for birth date will be needed for time adjustments - follow http://cvrank.org/ for news on this issue)
+A standard profile field for birth date will be needed for time adjustments

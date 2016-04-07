@@ -4,21 +4,15 @@ Provides standardized Resume/ePorfolio fields, CVRank calculation functions, and
 
 == Contents ==
 
-1. Features
-2. TO DO
-3. Known issues
-4. Version History
+1. Known issues
+2. Version History
 
-== 1. Features ==
-Visit http://cvrank.org/wiki/cvranking
-
-== 2. TO DO ==
-Visit http://cvrank.org/wiki/cvranking
-
-== 3. Known issues ==
+== 1. Known issues ==
 None yet!
 
-== 4. Version History ==
+== 2. Version History ==
+1.10.1:
+- Updated it to support Elgg 1.12.x
 
 1.5 alpha (2012-03-27):
 
