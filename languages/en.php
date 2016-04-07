@@ -2,6 +2,7 @@
 
 $english = array(
 //FOR INDEX
+	'river:create:object:resume' => '%s update his %s',
     'resume:my' => "My ePortfolio",
     'resume:user' => "%s's ePortfolio",
     'resume:help' => "help",

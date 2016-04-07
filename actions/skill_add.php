@@ -77,7 +77,12 @@ $experience->save();
 system_message(elgg_echo('resume:OK'));
 
 // add to river
-add_to_river('river/object/resume/create', $action, elgg_get_logged_in_user_guid(), $experience->guid);
+elgg_create_river_item(array(
+        'view' => 'river/object/resume/create',
+        'action_type' => $action,
+        'subject_guid' => elgg_get_logged_in_user_guid(),
+        'object_guid' => $experience->guid,
+));
 
 // forward user to a main page
 forward($CONFIG->wwwroot . "resumes/" . elgg_get_logged_in_user_entity()->username. "?tab=skill");

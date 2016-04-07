@@ -30,15 +30,6 @@ elgg_register_event_handler('init', 'system', 'resume_init');
 function resume_init() {
 elgg_register_page_handler('livesearch', 'resume_input_livesearch_page_handler');
     
-  // Add menu item to logged users
-  if (elgg_is_logged_in ()) { 
-    elgg_register_menu_item('site', array(
-            'name' => 'resume',
-            'text' => elgg_echo('resume:menu:item'),
-            'href' => 'resumes/' . elgg_get_logged_in_user_entity()->username
-        ));
-
-  }
   // elgg_unregister_menu_item('topbar', 'elgg_logo');
   
   // Extend profile menu to include resume item - doesn't work?
