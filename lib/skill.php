@@ -7,7 +7,7 @@
 	 * Function skillcvrate() in skills
 	 */
 
-  function skillcvrate($ratedobject, $cvr_arrays, $objects_array) {
+  function skillcvrate($ratedobject, $cvr_arrays, $objects_array = array()) {
      
       // GET arrays of selected values
       $advanced_values = $cvr_arrays['advanced_values'];

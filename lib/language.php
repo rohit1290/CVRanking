@@ -11,7 +11,7 @@
 	 * Function langcvrate() in language
 	 */
 
-  function langcvrate($ratedobject, $cvr_arrays, $objects_array) {
+  function langcvrate($ratedobject, $cvr_arrays, $objects_array = array()) {
     
       // GET arrays of selected values
       $advanced_values = $cvr_arrays['advanced_values'];
