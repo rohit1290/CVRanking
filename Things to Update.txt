@@ -1,3 +1,6 @@
-Printable format is not working
-Add information related to Indian education system
-Fix link to open the e-portfolio
+Improve Printable format
+Remove EuroPass XML from print option
+Add information related to Indian education system (Personal)
+Change input type to numbers where number are involved
+Fix link to for e-portfolio
+- Comment link not working
