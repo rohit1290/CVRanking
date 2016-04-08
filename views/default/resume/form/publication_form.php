@@ -327,8 +327,11 @@ function removeElement(parentDiv, childDiv){
     
     <?php echo elgg_view('input/securitytoken'); ?>
     
-    <p><?php echo elgg_view('input/submit', array('value' => elgg_echo('resume:save'))); ?></p>
-    
+    <p>
+	<?php echo elgg_view('input/submit', array('value' => elgg_echo('resume:save'))); ?> 
+	<button class="elgg-button elgg-button-delete"><a href="<?php echo elgg_get_site_url()?>resume/<?php echo elgg_get_logged_in_user_entity()->username; ?>/?tab=<?php echo $_GET['redirect']?>" style="color: #fff;">Cancel</a></button>
+	</p> 
+	
     <?php if (isset($vars['entity'])) {
       echo elgg_view('input/hidden', array('name' => 'id', 'value' => $vars['entity']->getGUID()));
     } ?>

@@ -156,7 +156,7 @@ if (!$compact) {
     echo '<p>';
       // Edit & delete links
       if (($page_owner->guid == elgg_get_logged_in_user_entity()->guid) && (elgg_get_context() != "profileprint")) {
-        echo '<a href="' . $vars['url'] . 'mod/resume/education.php?id=' . $vars['entity']->getGUID() . '">' . elgg_echo('resume:edit') . '</a>&nbsp; ';
+        echo '<a href="' . $vars['url'] . 'mod/resume/education.php?redirect=education&id=' . $vars['entity']->getGUID() . '">' . elgg_echo('resume:edit') . '</a>&nbsp; ';
         echo elgg_view("output/confirmlink", array( 'href' => $vars['url'] . "action/resume/delete?id=" . $vars['entity']->getGUID(),
             'text' => elgg_echo('resume:delete'), 'confirm' => elgg_echo('resume:delete:element'), )) . '&nbsp; ';
         echo elgg_view("editmenu", array('entity' => $vars['entity'])); // Allow the menu to be extended

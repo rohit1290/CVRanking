@@ -362,8 +362,11 @@ echo elgg_view('input/autocomplete', array('name' => 'exams[1]', 'match_on' => '
     
     <?php echo elgg_view('input/securitytoken'); ?>
     
-    <p><?php echo elgg_view('input/submit', array('value' => elgg_echo('resume:languages:save'))); ?></p>
-    
+    <p>
+	<?php echo elgg_view('input/submit', array('value' => elgg_echo('resume:save'))); ?> 
+	<button class="elgg-button elgg-button-delete"><a href="<?php echo elgg_get_site_url()?>resume/<?php echo elgg_get_logged_in_user_entity()->username; ?>/?tab=<?php echo $_GET['redirect']?>" style="color: #fff;">Cancel</a></button>
+	</p> 
+	
     <?php // Pass the GUID if existing entity
     if (isset($vars['entity'])) { echo elgg_view('input/hidden', array('name' => 'id', 'value' => $vars['entity']->getGUID())); }
     ?>

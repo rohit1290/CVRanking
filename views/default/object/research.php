@@ -168,7 +168,7 @@ if (!$compact) {
 } else {
   // Compact view : edit & delete links
   if ($page_owner->guid == elgg_get_logged_in_user_entity()->guid) {
-    echo '<a href="' . $vars['url'] . 'mod/resume/research.php?id=' . $vars['entity']->getGUID() . '" title="' . elgg_echo('edit') . '">' . date('m/Y', $vars['entity']->startdate) . "&rarr;";
+    echo '<a href="' . $vars['url'] . 'mod/resume/research.php?redirect=research&id=' . $vars['entity']->getGUID() . '" title="' . elgg_echo('edit') . '">' . date('m/Y', $vars['entity']->startdate) . "&rarr;";
     if ($vars['entity']->ongoing == 'ongoing') echo elgg_echo('resume:date:now'); else echo date('d/m/Y', $vars['entity']->enddate);
     echo '&nbsp;: ' . $vars['entity']->heading . '</a> &nbsp; ' 
       . '<b>' . elgg_view("output/confirmlink", array( 'href' => $vars['url'] . "action/resume/delete?id=" . $vars['entity']->getGUID(), 'text' => 'x', 'confirm' => elgg_echo('resume:delete:element'), 'title' => elgg_echo('delete'))) . '</b>';

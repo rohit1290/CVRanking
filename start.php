@@ -136,15 +136,6 @@ function resume_pagesetup() {
     
   }
  
-  // Add "cancel" option if the user is in a create/edit form
-  if (elgg_get_context() == "resumes_form") {
-        elgg_register_menu_item('page', array(
-            'name' => 'cancel',
-            'text' => elgg_echo('resume:menu:cancel'),
-            'href' => "resumes/" . $loggedin_username
-                ));
-  }
-  
 }
 
 function resume_page_handler($page) {

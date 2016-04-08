@@ -142,7 +142,7 @@ if (!$compact) {
 } else {
   // Compact view : edit & delete links
   if ($page_owner->guid == elgg_get_logged_in_user_entity()->guid) {
-    echo '<a href="' . $vars['url'] . 'mod/resume/skill.php?id=' . $vars['entity']->getGUID() . '" title="' . elgg_echo('edit') . '">' . $vars['entity']->skilltype . '</a> &nbsp; ' 
+    echo '<a href="' . $vars['url'] . 'mod/resume/skill.php?redirect=skill&id=' . $vars['entity']->getGUID() . '" title="' . elgg_echo('edit') . '">' . $vars['entity']->skilltype . '</a> &nbsp; ' 
       . '<b>' . elgg_view("output/confirmlink", array( 'href' => $vars['url'] . "action/resume/delete?id=" . $vars['entity']->getGUID(), 'text' => 'x', 'confirm' => elgg_echo('resume:delete:element'), 'title' => elgg_echo('delete'))) . '</b>';
   } else {
     echo '<a href="' . $vars['entity']->getURL() . '">' . $vars['entity']->skilltype . '</a>';
